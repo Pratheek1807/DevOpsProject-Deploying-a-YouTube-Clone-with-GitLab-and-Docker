@@ -41,7 +41,7 @@ Docker build and push:
   services:
     - docker:dind
   script:
-    - docker build --build-arg REACT_APP_RAPID_API_KEY=f0ead79813mshb0aa7ddf114a7dap1adb3djsn483b017de1a9 -t youtubev1 .
+    - docker build --build-arg REACT_APP_RAPID_API_KEY=f186cc7d25mshe34d630af35f302p1f99e1jsn8d6fb652ce90' -t youtubev1 .
     - docker tag youtubev1 pratheek1807/youtubev1:latest
     - docker login -u $DOCKER_USERNAME -p $DOCKER_PASSWORD
     - docker push pratheek1807/youtubev1:latest
