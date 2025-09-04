@@ -2,6 +2,8 @@ stages:
     - npm
     - sonar
     - trivy file scan
+    - docker
+    - trivy image scan
 Install dependecy:
     stage: npm
     image:
@@ -32,3 +34,21 @@ Trivy file scan:
     entrypoint: [""]
   script:
     - trivy fs .
+Docker build and push:
+  stage: docker
+  image:
+    name: docker:latest
+  services:
+    - docker:dind
+  script:
+    - docker build --build-arg REACT_APP_RAPID_API_KEY=f0ead79813mshb0aa7ddf114a7dap1adb3djsn483b017de1a9 -t youtubev1 .
+    - docker tag youtubev1 pratheek1807/youtubev1:latest
+    - docker login -u $DOCKER_USERNAME -p $DOCKER_PASSWORD
+    - docker push pratheek1807/youtubev1:latest
+Scan image:
+  stage: trivy image scan
+  image:
+    name: aquasec/trivy:latest
+    entrypoint: [""]
+  script:
+    - trivy image pratheek1807/youtubev1:latest
