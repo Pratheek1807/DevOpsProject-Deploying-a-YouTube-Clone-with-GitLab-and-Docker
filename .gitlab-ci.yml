@@ -1,14 +1,13 @@
 stages:
     - npm
     - sonar
-
+    - trivy file scan
 Install dependecy:
     stage: npm
     image:
         name: node:16
     script:
         - npm install
-
 sonarqube-check:
   stage: sonar
   image:
@@ -26,3 +25,10 @@ sonarqube-check:
   allow_failure: true
   only:
     - child
+Trivy file scan:
+  stage: trivy file scan
+  image:
+    name: aquasec/trivy:latest
+    entrypoint: [""]
+  script:
+    - trivy fs .
