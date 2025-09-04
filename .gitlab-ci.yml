@@ -1,12 +1,14 @@
 stages:
     - npm
     - sonar
+
 Install dependecy:
     stage: npm
     image:
         name: node:16
     script:
         - npm install
+
 sonarqube-check:
   stage: sonar
   image:
@@ -23,4 +25,4 @@ sonarqube-check:
     - sonar-scanner
   allow_failure: true
   only:
-    - main
+    - child
