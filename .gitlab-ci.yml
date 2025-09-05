@@ -4,6 +4,7 @@ stages:
     - trivy file scan
     - docker
     - trivy image scan
+    - run container
 Install dependecy:
     stage: npm
     image:
@@ -52,3 +53,16 @@ Scan image:
     entrypoint: [""]
   script:
     - trivy image pratheek1807/youtubev1:latest
+
+deploy:
+  stage: run container
+  tags:
+    - youtube
+  script:
+    - docker run -d --name youtube -p 3000:3000 pratheek1807/youtubev1:latest
+
+
+
+
+
+
