@@ -59,8 +59,9 @@ deploy:
   tags:
     - youtube
   script:
+    - docker stop youtube || true
+    - docker rm youtube || true
     - docker run -d --name youtube -p 3000:3000 pratheek1807/youtubev1:latest
-
 
 
 
